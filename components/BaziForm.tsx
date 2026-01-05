@@ -41,13 +41,13 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
     // Validate API Config
     const errors: { modelName?: string, apiBaseUrl?: string, apiKey?: string } = {};
     if (!formData.modelName.trim()) {
-      errors.modelName = '请输入模型名称';
+      errors.modelName = '請輸入模型名稱';
     }
     if (!formData.apiBaseUrl.trim()) {
-      errors.apiBaseUrl = '请输入 API Base URL';
+      errors.apiBaseUrl = '請輸入 API Base URL';
     }
     if (!formData.apiKey.trim()) {
-      errors.apiKey = '请输入 API Key';
+      errors.apiKey = '請輸入 API Key';
     }
 
     if (Object.keys(errors).length > 0) {
@@ -60,7 +60,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
 
   // Calculate direction for UI feedback
   const daYunDirectionInfo = useMemo(() => {
-    if (!formData.yearPillar) return '等待输入年柱...';
+    if (!formData.yearPillar) return '等待輸入年柱...';
 
     const firstChar = formData.yearPillar.trim().charAt(0);
     const yinStems = ['乙', '丁', '己', '辛', '癸'];
@@ -75,14 +75,14 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
       isForward = !isYangYear; // Female Yin = Forward, Female Yang = Backward
     }
 
-    return isForward ? '顺行 (阳男/阴女)' : '逆行 (阴男/阳女)';
+    return isForward ? '順行 (陽男/陰女)' : '逆行 (陰男/陽女)';
   }, [formData.yearPillar, formData.gender]);
 
   return (
     <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
       <div className="text-center mb-6">
-        <h2 className="text-3xl font-serif-sc font-bold text-gray-800 mb-2">八字排盘</h2>
-        <p className="text-gray-500 text-sm">请输入四柱与大运信息以生成分析</p>
+        <h2 className="text-3xl font-serif-sc font-bold text-gray-800 mb-2">八字排盤</h2>
+        <p className="text-gray-500 text-sm">請輸入四柱與大運資訊以生成分析</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -90,7 +90,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
         {/* Name & Gender */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">姓名 (可选)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">姓名 (選填)</label>
             <input
               type="text"
               name="name"
@@ -101,14 +101,14 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">性别</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">性別</label>
             <div className="flex bg-gray-100 rounded-lg p-1">
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, gender: Gender.MALE })}
                 className={`flex-1 py-1.5 rounded-md text-xs font-medium transition ${formData.gender === Gender.MALE
-                    ? 'bg-white text-indigo-700 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-700'
+                  ? 'bg-white text-indigo-700 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
                   }`}
               >
                 乾造 (男)
@@ -117,8 +117,8 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
                 type="button"
                 onClick={() => setFormData({ ...formData, gender: Gender.FEMALE })}
                 className={`flex-1 py-1.5 rounded-md text-xs font-medium transition ${formData.gender === Gender.FEMALE
-                    ? 'bg-white text-pink-700 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-700'
+                  ? 'bg-white text-pink-700 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
                   }`}
               >
                 坤造 (女)
@@ -131,12 +131,12 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
         <div className="bg-amber-50 p-4 rounded-xl border border-amber-100">
           <div className="flex items-center gap-2 mb-3 text-amber-800 text-sm font-bold">
             <Sparkles className="w-4 h-4" />
-            <span>输入四柱干支 (必填)</span>
+            <span>輸入四柱干支 (必填)</span>
           </div>
 
           {/* Birth Year Input - Added as requested */}
           <div className="mb-4">
-            <label className="block text-xs font-bold text-gray-600 mb-1">出生年份 (阳历)</label>
+            <label className="block text-xs font-bold text-gray-600 mb-1">出生年份 (陽曆)</label>
             <input
               type="number"
               name="birthYear"
@@ -188,7 +188,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-600 mb-1">时柱 (Hour)</label>
+              <label className="block text-xs font-bold text-gray-600 mb-1">時柱 (Hour)</label>
               <input
                 type="text"
                 name="hourPillar"
@@ -206,11 +206,11 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
         <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
           <div className="flex items-center gap-2 mb-3 text-indigo-800 text-sm font-bold">
             <TrendingUp className="w-4 h-4" />
-            <span>大运排盘信息 (必填)</span>
+            <span>大運排盤資訊 (必填)</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-600 mb-1">起运年龄 (虚岁)</label>
+              <label className="block text-xs font-bold text-gray-600 mb-1">起運年齡 (虛歲)</label>
               <input
                 type="number"
                 name="startAge"
@@ -224,7 +224,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-600 mb-1">第一步大运</label>
+              <label className="block text-xs font-bold text-gray-600 mb-1">第一步大運</label>
               <input
                 type="text"
                 name="firstDaYun"
@@ -237,7 +237,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
             </div>
           </div>
           <p className="text-xs text-indigo-600/70 mt-2 text-center">
-            当前大运排序规则：
+            目前大運排序規則：
             <span className="font-bold text-indigo-900">{daYunDirectionInfo}</span>
           </p>
         </div>
@@ -246,7 +246,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
         <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
           <div className="flex items-center gap-2 mb-3 text-gray-700 text-sm font-bold">
             <Settings className="w-4 h-4" />
-            <span>模型接口设置 (必填)</span>
+            <span>模型接口設置 (必填)</span>
           </div>
           <div className="space-y-3">
             <div>
@@ -296,12 +296,12 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
           {isLoading ? (
             <>
               <Loader2 className="animate-spin h-5 w-5" />
-              <span>大师推演中(3-5分钟)</span>
+              <span>大師推演中 (3-5 分鐘)</span>
             </>
           ) : (
             <>
               <Sparkles className="h-5 w-5 text-amber-300" />
-              <span>生成人生K线</span>
+              <span>生成人生 K 線</span>
             </>
           )}
         </button>

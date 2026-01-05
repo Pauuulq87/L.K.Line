@@ -36,7 +36,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
 
         return {
             isForward,
-            text: isForward ? '顺行 (Forward)' : '逆行 (Backward)'
+            text: isForward ? '順行 (Forward)' : '逆行 (Backward)'
         };
     };
 
@@ -47,90 +47,90 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
         const startAgeInt = parseInt(baziInfo.startAge) || 1;
 
         const directionExample = isForward
-            ? "例如：第一步是【戊申】，第二步则是【己酉】（顺排）"
-            : "例如：第一步是【戊申】，第二步则是【丁未】（逆排）";
+            ? "例如：第一步是【戊申】，第二步則是【己酉】（順排）"
+            : "例如：第一步是【戊申】，第二步則是【丁未】（逆排）";
 
         const yearStemPolarity = (() => {
             const firstChar = baziInfo.yearPillar.trim().charAt(0);
             const yangStems = ['甲', '丙', '戊', '庚', '壬'];
-            return yangStems.includes(firstChar) ? '阳' : '阴';
+            return yangStems.includes(firstChar) ? '陽' : '陰';
         })();
 
-        return `请根据以下**已经排好的**八字四柱和**指定的大运信息**进行分析。
+        return `請根據以下**已經排好的**八字四柱和**指定的大運資訊**進行分析。
 
-【基本信息】
-性别：${genderStr}
+【基本資訊】
+性別：${genderStr}
 姓名：${baziInfo.name || "未提供"}
-出生年份：${baziInfo.birthYear}年 (阳历)
+出生年份：${baziInfo.birthYear}年 (陽曆)
 
 【八字四柱】
-年柱：${baziInfo.yearPillar} (天干属性：${yearStemPolarity})
+年柱：${baziInfo.yearPillar} (天干屬性：${yearStemPolarity})
 月柱：${baziInfo.monthPillar}
 日柱：${baziInfo.dayPillar}
-时柱：${baziInfo.hourPillar}
+時柱：${baziInfo.hourPillar}
 
-【大运核心参数】
-1. 起运年龄：${baziInfo.startAge} 岁 (虚岁)。
-2. 第一步大运：${baziInfo.firstDaYun}。
+【大運核心參數】
+1. 起運年齡：${baziInfo.startAge} 歲 (虛歲)。
+2. 第一步大運：${baziInfo.firstDaYun}。
 3. **排序方向**：${daYunDirectionStr}。
 
-【必须执行的算法 - 大运序列生成】
-请严格按照以下步骤生成数据：
+【必須執行的演算法 - 大運序列生成】
+請嚴格按照以下步驟生成數據：
 
-1. **锁定第一步**：确认【${baziInfo.firstDaYun}】为第一步大运。
-2. **计算序列**：根据六十甲子顺序和方向（${daYunDirectionStr}），推算出接下来的 9 步大运。
+1. **鎖定第一步**：確認【${baziInfo.firstDaYun}】為第一步大運。
+2. **計算序列**：根據六十甲子順序和方向（${daYunDirectionStr}），推算出接下來的 9 步大運。
    ${directionExample}
 3. **填充 JSON**：
    - Age 1 到 ${startAgeInt - 1}: daYun = "童限"
-   - Age ${startAgeInt} 到 ${startAgeInt + 9}: daYun = [第1步大运: ${baziInfo.firstDaYun}]
-   - Age ${startAgeInt + 10} 到 ${startAgeInt + 19}: daYun = [第2步大运]
-   - ...以此类推直到 100 岁。
+   - Age ${startAgeInt} 到 ${startAgeInt + 9}: daYun = [第1步大運: ${baziInfo.firstDaYun}]
+   - Age ${startAgeInt + 10} 到 ${startAgeInt + 19}: daYun = [第2步大運]
+   - ...以此類推直到 100 歲。
 
-【特别警告】
-- **daYun 字段**：必须填大运干支（10年一变），**绝对不要**填流年干支。
-- **ganZhi 字段**：填入该年份的**流年干支**（每年一变，例如 2024=甲辰，2025=乙巳）。
+【特別警告】
+- **daYun 欄位**：必須填大運干支（10 年一變），**絕對不要**填流年干支。
+- **ganZhi 欄位**：填入該年份的**流年干支**（每年一變，例如 2024=甲辰，2025=乙巳）。
 
-任务：
-1. 确认格局与喜忌。
-2. 生成 **1-100 岁 (虚岁)** 的人生流年K线数据。
-3. 在 \`reason\` 字段中提供流年详批。
-4. 生成带评分的命理分析报告（包含性格分析、币圈交易分析、发展风水分析）。
+任務：
+1. 確認格局與喜忌。
+2. 生成 **1-100 歲 (虛歲)** 的人生流年 K 線數據。
+3. 在 \`reason\` 欄位中提供流年詳批。
+4. 生成帶評分的命理分析報告（包含性格分析、幣圈交易分析、發展風水分析）。
 
-请严格按照系统指令生成 JSON 数据。务必只返回纯JSON格式数据，不要包含任何markdown代码块标记或其他文字说明。`;
+請嚴格按照系統指令生成 JSON 數據。務必僅回傳純 JSON 格式數據，不要包含任何 Markdown 代碼塊標記或其他文字說明。`;
     };
 
-    // 复制完整提示词
+    // 複製完整提示詞
     const copyFullPrompt = async () => {
-        const fullPrompt = `=== 系统指令 (System Prompt) ===\n\n${BAZI_SYSTEM_INSTRUCTION}\n\n=== 用户提示词 (User Prompt) ===\n\n${generateUserPrompt()}`;
+        const fullPrompt = `=== 系統指令 (System Prompt) ===\n\n${BAZI_SYSTEM_INSTRUCTION}\n\n=== 用戶提示詞 (User Prompt) ===\n\n${generateUserPrompt()}`;
 
         try {
             await navigator.clipboard.writeText(fullPrompt);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
-            console.error('复制失败', err);
+            console.error('複製失敗', err);
         }
     };
 
-    // 解析导入的 JSON
+    // 解析導入的 JSON
     const handleImport = () => {
         setError(null);
 
         if (!jsonInput.trim()) {
-            setError('请粘贴 AI 返回的 JSON 数据');
+            setError('請貼上 AI 回傳的 JSON 數據');
             return;
         }
 
         try {
-            // 尝试从可能包含 markdown 的内容中提取 JSON
+            // 嘗試從可能包含 markdown 的內容中提取 JSON
             let jsonContent = jsonInput.trim();
 
-            // 提取 ```json ... ``` 中的内容
+            // 提取 ```json ... ``` 中的內容
             const jsonMatch = jsonContent.match(/```(?:json)?\s*([\s\S]*?)```/);
             if (jsonMatch) {
                 jsonContent = jsonMatch[1].trim();
             } else {
-                // 尝试找到 JSON 对象
+                // 嘗試找到 JSON 對象
                 const jsonStartIndex = jsonContent.indexOf('{');
                 const jsonEndIndex = jsonContent.lastIndexOf('}');
                 if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
@@ -140,46 +140,46 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
 
             const data = JSON.parse(jsonContent);
 
-            // 校验数据
+            // 校驗數據
             if (!data.chartPoints || !Array.isArray(data.chartPoints)) {
-                throw new Error('数据格式不正确：缺少 chartPoints 数组');
+                throw new Error('數據格式不正確：缺少 chartPoints 陣列');
             }
 
             if (data.chartPoints.length < 10) {
-                throw new Error('数据不完整：chartPoints 数量太少');
+                throw new Error('數據不完整：chartPoints 數量太少');
             }
 
-            // 转换为应用所需格式
+            // 轉換為應用所需格式
             const result: LifeDestinyResult = {
                 chartData: data.chartPoints,
                 analysis: {
                     bazi: data.bazi || [],
-                    summary: data.summary || "无摘要",
+                    summary: data.summary || "無摘要",
                     summaryScore: data.summaryScore || 5,
-                    personality: data.personality || "无性格分析",
+                    personality: data.personality || "無性格分析",
                     personalityScore: data.personalityScore || 5,
-                    industry: data.industry || "无",
+                    industry: data.industry || "無",
                     industryScore: data.industryScore || 5,
-                    fengShui: data.fengShui || "建议多亲近自然，保持心境平和。",
+                    fengShui: data.fengShui || "建議多親近自然，保持心境平和。",
                     fengShuiScore: data.fengShuiScore || 5,
-                    wealth: data.wealth || "无",
+                    wealth: data.wealth || "無",
                     wealthScore: data.wealthScore || 5,
-                    marriage: data.marriage || "无",
+                    marriage: data.marriage || "無",
                     marriageScore: data.marriageScore || 5,
-                    health: data.health || "无",
+                    health: data.health || "無",
                     healthScore: data.healthScore || 5,
-                    family: data.family || "无",
+                    family: data.family || "無",
                     familyScore: data.familyScore || 5,
-                    crypto: data.crypto || "暂无交易分析",
+                    crypto: data.crypto || "暫無交易分析",
                     cryptoScore: data.cryptoScore || 5,
                     cryptoYear: data.cryptoYear || "待定",
-                    cryptoStyle: data.cryptoStyle || "现货定投",
+                    cryptoStyle: data.cryptoStyle || "現貨定投",
                 },
             };
 
             onDataImport(result);
         } catch (err: any) {
-            setError(`解析失败：${err.message}`);
+            setError(`解析失敗：${err.message}`);
         }
     };
 
@@ -192,7 +192,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
 
     return (
         <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-            {/* 步骤指示器 */}
+            {/* 步驟指示器 */}
             <div className="flex items-center justify-center gap-2 mb-8">
                 {[1, 2, 3].map((s) => (
                     <React.Fragment key={s}>
@@ -211,17 +211,17 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                 ))}
             </div>
 
-            {/* 步骤 1: 输入八字信息 */}
+            {/* 步驟 1: 輸入八字資訊 */}
             {step === 1 && (
                 <div className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第一步：输入八字信息</h2>
-                        <p className="text-gray-500 text-sm">填写您的四柱与大运信息</p>
+                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第一步：輸入八字資訊</h2>
+                        <p className="text-gray-500 text-sm">填寫您的四柱與大運資訊</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs font-bold text-gray-600 mb-1">姓名 (可选)</label>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">姓名 (選填)</label>
                             <input
                                 type="text"
                                 name="name"
@@ -232,7 +232,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                             />
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-gray-600 mb-1">性别</label>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">性別</label>
                             <select
                                 name="gender"
                                 value={baziInfo.gender}
@@ -252,7 +252,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-xs font-bold text-gray-600 mb-1">出生年份 (阳历)</label>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">出生年份 (陽曆)</label>
                             <input
                                 type="number"
                                 name="birthYear"
@@ -266,7 +266,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                         <div className="grid grid-cols-4 gap-3">
                             {(['yearPillar', 'monthPillar', 'dayPillar', 'hourPillar'] as const).map((field, i) => (
                                 <div key={field}>
-                                    <label className="block text-xs font-bold text-gray-600 mb-1">{['年柱', '月柱', '日柱', '时柱'][i]}</label>
+                                    <label className="block text-xs font-bold text-gray-600 mb-1">{['年柱', '月柱', '日柱', '時柱'][i]}</label>
                                     <input
                                         type="text"
                                         name={field}
@@ -283,7 +283,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                     <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold text-gray-600 mb-1">起运年龄 (虚岁)</label>
+                                <label className="block text-xs font-bold text-gray-600 mb-1">起運年齡 (虛歲)</label>
                                 <input
                                     type="number"
                                     name="startAge"
@@ -294,7 +294,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-600 mb-1">第一步大运</label>
+                                <label className="block text-xs font-bold text-gray-600 mb-1">第一步大運</label>
                                 <input
                                     type="text"
                                     name="firstDaYun"
@@ -306,7 +306,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                             </div>
                         </div>
                         <p className="text-xs text-indigo-600/70 mt-2 text-center">
-                            大运方向：<span className="font-bold text-indigo-900">{getDaYunDirection().text}</span>
+                            大運方向：<span className="font-bold text-indigo-900">{getDaYunDirection().text}</span>
                         </p>
                     </div>
 
@@ -315,25 +315,25 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                         disabled={!isStep1Valid}
                         className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
                     >
-                        下一步：生成提示词 <ArrowRight className="w-5 h-5" />
+                        下一步：生成提示詞 <ArrowRight className="w-5 h-5" />
                     </button>
                 </div>
             )}
 
-            {/* 步骤 2: 复制提示词 */}
+            {/* 步驟 2: 複製提示詞 */}
             {step === 2 && (
                 <div className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第二步：复制提示词</h2>
-                        <p className="text-gray-500 text-sm">将提示词粘贴到任意 AI 聊天工具</p>
+                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第二步：複製提示詞</h2>
+                        <p className="text-gray-500 text-sm">將提示詞貼到任意 AI 聊天工具</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
                         <div className="flex items-center gap-3 mb-4">
                             <MessageSquare className="w-6 h-6 text-blue-600" />
                             <div>
-                                <h3 className="font-bold text-gray-800">支持的 AI 工具</h3>
-                                <p className="text-sm text-gray-600">ChatGPT、Claude、Gemini、通义千问、文心一言 等</p>
+                                <h3 className="font-bold text-gray-800">支援的 AI 工具</h3>
+                                <p className="text-sm text-gray-600">ChatGPT、Claude、Gemini、通義千問、文心一言等</p>
                             </div>
                         </div>
 
@@ -353,25 +353,25 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                             {copied ? (
                                 <>
                                     <CheckCircle className="w-5 h-5" />
-                                    已复制到剪贴板！
+                                    已複製到剪貼板！
                                 </>
                             ) : (
                                 <>
                                     <Copy className="w-5 h-5" />
-                                    复制完整提示词
+                                    複製完整提示詞
                                 </>
                             )}
                         </button>
                     </div>
 
                     <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                        <h4 className="font-bold text-amber-800 mb-2">📝 使用说明</h4>
+                        <h4 className="font-bold text-amber-800 mb-2">📝 使用說明</h4>
                         <ol className="text-sm text-amber-700 space-y-1 list-decimal list-inside">
-                            <li>点击上方按钮复制提示词</li>
-                            <li>打开任意 AI 聊天工具（如 ChatGPT）</li>
-                            <li>粘贴提示词并发送</li>
-                            <li>等待 AI 生成完整的 JSON 数据</li>
-                            <li>复制 AI 的回复，回到这里进行下一步</li>
+                            <li>點擊上方按鈕複製提示詞</li>
+                            <li>打開任意 AI 聊天工具（如 ChatGPT）</li>
+                            <li>貼上提示詞並發送</li>
+                            <li>等待 AI 生成完整的 JSON 數據</li>
+                            <li>複製 AI 的回覆，回到這裡進行下一步</li>
                         </ol>
                     </div>
 
@@ -386,29 +386,29 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                             onClick={() => setStep(3)}
                             className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
                         >
-                            下一步：导入数据 <ArrowRight className="w-5 h-5" />
+                            下一步：匯入數據 <ArrowRight className="w-5 h-5" />
                         </button>
                     </div>
                 </div>
             )}
 
-            {/* 步骤 3: 导入 JSON */}
+            {/* 步驟 3: 導入 JSON */}
             {step === 3 && (
                 <div className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第三步：导入 AI 回复</h2>
-                        <p className="text-gray-500 text-sm">粘贴 AI 返回的 JSON 数据</p>
+                        <h2 className="text-2xl font-bold font-serif-sc text-gray-800 mb-2">第三步：匯入 AI 回覆</h2>
+                        <p className="text-gray-500 text-sm">貼上 AI 回傳的 JSON 數據</p>
                     </div>
 
                     <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
                         <label className="block text-sm font-bold text-gray-700 mb-2">
                             <Upload className="w-4 h-4 inline mr-2" />
-                            粘贴 AI 返回的 JSON 数据
+                            貼上 AI 回傳的 JSON 數據
                         </label>
                         <textarea
                             value={jsonInput}
                             onChange={(e) => setJsonInput(e.target.value)}
-                            placeholder='将 AI 返回的 JSON 数据粘贴到这里...&#10;&#10;例如:&#10;{&#10;  "bazi": ["癸未", "壬戌", "丙子", "庚寅"],&#10;  "chartPoints": [...],&#10;  ...&#10;}'
+                            placeholder='將 AI 回傳的 JSON 數據貼到這裡...&#10;&#10;例如:&#10;{&#10;  "bazi": ["癸未", "壬戌", "丙子", "庚寅"],&#10;  "chartPoints": [...],&#10;  ...&#10;}'
                             className="w-full h-64 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-xs resize-none"
                         />
                     </div>
@@ -432,7 +432,7 @@ const ImportDataMode: React.FC<ImportDataModeProps> = ({ onDataImport }) => {
                             className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
                         >
                             <Sparkles className="w-5 h-5" />
-                            生成人生K线
+                            生成人生 K 線
                         </button>
                     </div>
                 </div>

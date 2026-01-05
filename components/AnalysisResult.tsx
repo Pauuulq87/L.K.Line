@@ -105,7 +105,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
       {/* Bazi Pillars */}
       <div className="flex justify-center gap-2 md:gap-8 bg-gray-900 text-amber-50 p-6 rounded-xl shadow-lg overflow-x-auto">
         {analysis.bazi.map((pillar, index) => {
-          const labels = ['年柱', '月柱', '日柱', '时柱'];
+          const labels = ['年柱', '月柱', '日柱', '時柱'];
           return (
             <div key={index} className="text-center min-w-[60px]">
               <div className="text-xs text-gray-400 mb-1">{labels[index]}</div>
@@ -120,7 +120,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
           <h3 className="flex items-center gap-2 font-serif-sc font-bold text-xl text-indigo-900">
             <ScrollText className="w-5 h-5" />
-            命理总评
+            命理總評
           </h3>
           <div className="w-full md:w-1/3">
             <ScoreBar score={analysis.summaryScore} />
@@ -134,7 +134,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
 
         {/* Crypto Analysis */}
         <Card
-          title="币圈交易运势"
+          title="幣圈交易運勢"
           icon={Bitcoin}
           content={analysis.crypto}
           score={analysis.cryptoScore}
@@ -145,7 +145,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
                 🔥 暴富流年: {analysis.cryptoYear}
               </span>
               <span className="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded border border-indigo-200">
-                🎯 推荐: {analysis.cryptoStyle}
+                🎯 推薦: {analysis.cryptoStyle}
               </span>
             </>
           }
@@ -159,7 +159,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
           colorClass="text-teal-600"
         />
         <Card
-          title="事业行业"
+          title="事業行業"
           icon={Briefcase}
           content={analysis.industry}
           score={analysis.industryScore}
@@ -168,7 +168,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
 
         {/* Feng Shui Analysis */}
         <Card
-          title="发展风水"
+          title="發展風水"
           icon={Compass}
           content={analysis.fengShui}
           score={analysis.fengShuiScore}
@@ -176,7 +176,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
         />
 
         <Card
-          title="财富层级"
+          title="財富層級"
           icon={Coins}
           content={analysis.wealth}
           score={analysis.wealthScore}
@@ -190,14 +190,14 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
           colorClass="text-pink-600"
         />
         <Card
-          title="身体健康"
+          title="身體健康"
           icon={Activity}
           content={analysis.health}
           score={analysis.healthScore}
           colorClass="text-emerald-600"
         />
         <Card
-          title="六亲关系"
+          title="六親關係"
           icon={Users}
           content={analysis.family}
           score={analysis.familyScore}
@@ -206,7 +206,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
 
         {/* Static Score Explanation Card */}
         <Card
-          title="评分讲解"
+          title="評分講解"
           icon={Info}
           colorClass="text-gray-600"
           content={
@@ -214,7 +214,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
               <ul className="space-y-1.5 font-mono text-xs md:text-sm">
                 <li className="flex justify-between items-center border-b border-gray-100 pb-1">
                   <span>0-2分</span>
-                  <span className="text-xs px-2 py-0.5 bg-red-100 text-red-600 rounded font-bold">极差</span>
+                  <span className="text-xs px-2 py-0.5 bg-red-100 text-red-600 rounded font-bold">極差</span>
                 </li>
                 <li className="flex justify-between items-center border-b border-gray-100 pb-1">
                   <span>3-4分</span>
@@ -230,11 +230,11 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ analysis }) => {
                 </li>
                 <li className="flex justify-between items-center">
                   <span>9-10分</span>
-                  <span className="text-xs px-2 py-0.5 bg-green-100 text-green-600 rounded font-bold">极好</span>
+                  <span className="text-xs px-2 py-0.5 bg-green-100 text-green-600 rounded font-bold">極好</span>
                 </li>
               </ul>
               <p className="text-xs text-black leading-relaxed border-t border-gray-100 pt-2 text-justify">
-                注：命运还受环境和个人选择影响，八字趋势不能完全代表真实人生，命理学不是玄学，而是帮助我们在人生列车上做出更好选择的哲学工具。一命二运三风水 四积阴德五读书 六名七相八敬神 九遇贵人十养生。
+                註：命運還受環境和個人選擇影響，八字趨勢不能完全代表真實人生，命理學不是玄學，而是幫助我們在人生列車上做出更好選擇的哲學工具。一命二運三風水 四積陰德五讀書 六名七相八敬神 九遇貴人十養生。
               </p>
             </div>
           }

@@ -28,10 +28,10 @@ const CustomTooltip = ({ active, payload }: any) => {
         <div className="flex justify-between items-start mb-3 border-b border-gray-100 pb-2">
           <div>
             <p className="text-xl font-bold text-gray-800 font-serif-sc">
-              {data.year} {data.ganZhi}年 <span className="text-base text-gray-500 font-sans">({data.age}岁)</span>
+              {data.year} {data.ganZhi}年 <span className="text-base text-gray-500 font-sans">({data.age}歲)</span>
             </p>
             <p className="text-sm text-indigo-600 font-medium mt-1">
-              大运：{data.daYun || '未知'}
+              大運：{data.daYun || '未知'}
             </p>
           </div>
           <div className={`text-base font-bold px-2 py-1 rounded ${isUp ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -42,11 +42,11 @@ const CustomTooltip = ({ active, payload }: any) => {
         {/* Data Grid */}
         <div className="grid grid-cols-4 gap-2 text-xs text-gray-500 mb-4 bg-gray-50 p-2 rounded">
           <div className="text-center">
-            <span className="block scale-90">开盘</span>
+            <span className="block scale-90">開盤</span>
             <span className="font-mono text-gray-700 font-bold">{data.open}</span>
           </div>
           <div className="text-center">
-            <span className="block scale-90">收盘</span>
+            <span className="block scale-90">收盤</span>
             <span className="font-mono text-gray-700 font-bold">{data.close}</span>
           </div>
           <div className="text-center">
@@ -76,7 +76,7 @@ const CandleShape = (props: any) => {
   const isUp = payload.close >= payload.open;
   const color = isUp ? '#22c55e' : '#ef4444'; // Green Up, Red Down
   const strokeColor = isUp ? '#15803d' : '#b91c1c'; // Darker stroke for better visibility
-  
+
   let highY = y;
   let lowY = y + height;
 
@@ -100,12 +100,12 @@ const CandleShape = (props: any) => {
       {/* Wick - made slightly thicker for visibility */}
       <line x1={center} y1={highY} x2={center} y2={lowY} stroke={strokeColor} strokeWidth={2} />
       {/* Body */}
-      <rect 
-        x={x} 
-        y={y} 
-        width={width} 
-        height={renderHeight} 
-        fill={color} 
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={renderHeight}
+        fill={color}
         stroke={strokeColor}
         strokeWidth={1}
         rx={1} // Slight border radius
@@ -117,7 +117,7 @@ const CandleShape = (props: any) => {
 // Custom Label Component for the Peak Star
 const PeakLabel = (props: any) => {
   const { x, y, width, value, maxHigh } = props;
-  
+
   // Only render if this value equals the global max high
   if (value !== maxHigh) return null;
 
@@ -132,12 +132,12 @@ const PeakLabel = (props: any) => {
         strokeWidth="1"
       />
       {/* Score Text */}
-      <text 
-        x={x + width / 2} 
-        y={y - 28} 
-        fill="#b91c1c" 
-        fontSize={10} 
-        fontWeight="bold" 
+      <text
+        x={x + width / 2}
+        y={y - 28}
+        fill="#b91c1c"
+        fontSize={10}
+        fontWeight="bold"
         textAnchor="middle"
       >
         {value}
@@ -157,72 +157,72 @@ const LifeKLineChart: React.FC<LifeKLineChartProps> = ({ data }) => {
   // Identify Da Yun change points to draw reference lines
   const daYunChanges = data.filter((d, i) => {
     if (i === 0) return true;
-    return d.daYun !== data[i-1].daYun;
+    return d.daYun !== data[i - 1].daYun;
   });
 
   // Calculate Global Max High for the peak label
   const maxHigh = data.length > 0 ? Math.max(...data.map(d => d.high)) : 100;
 
   if (!data || data.length === 0) {
-    return <div className="h-[500px] flex items-center justify-center text-gray-400">无数据</div>;
+    return <div className="h-[500px] flex items-center justify-center text-gray-400">無數據</div>;
   }
 
   return (
     <div className="w-full h-[600px] bg-white p-2 md:p-6 rounded-xl border border-gray-200 shadow-sm relative">
       <div className="mb-6 flex justify-between items-center px-2">
-        <h3 className="text-xl font-bold text-gray-800 font-serif-sc">人生流年大运K线图</h3>
+        <h3 className="text-xl font-bold text-gray-800 font-serif-sc">人生流年大運 K 線圖</h3>
         <div className="flex gap-4 text-xs font-medium">
-           <span className="flex items-center text-green-700 bg-green-50 px-2 py-1 rounded"><div className="w-2 h-2 bg-green-500 mr-2 rounded-full"></div> 吉运 (涨)</span>
-           <span className="flex items-center text-red-700 bg-red-50 px-2 py-1 rounded"><div className="w-2 h-2 bg-red-500 mr-2 rounded-full"></div> 凶运 (跌)</span>
+          <span className="flex items-center text-green-700 bg-green-50 px-2 py-1 rounded"><div className="w-2 h-2 bg-green-500 mr-2 rounded-full"></div> 吉運 (漲)</span>
+          <span className="flex items-center text-red-700 bg-red-50 px-2 py-1 rounded"><div className="w-2 h-2 bg-red-500 mr-2 rounded-full"></div> 凶運 (跌)</span>
         </div>
       </div>
-      
+
       <ResponsiveContainer width="100%" height="90%">
         <ComposedChart data={transformedData} margin={{ top: 30, right: 10, left: 0, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-          
-          <XAxis 
-            dataKey="age" 
-            tick={{fontSize: 10, fill: '#6b7280'}}
-            interval={9} 
+
+          <XAxis
+            dataKey="age"
+            tick={{ fontSize: 10, fill: '#6b7280' }}
+            interval={9}
             axisLine={{ stroke: '#e5e7eb' }}
             tickLine={false}
-            label={{ value: '年龄', position: 'insideBottomRight', offset: -5, fontSize: 10, fill: '#9ca3af' }} 
+            label={{ value: '年齡', position: 'insideBottomRight', offset: -5, fontSize: 10, fill: '#9ca3af' }}
           />
-          
-          <YAxis 
-            domain={[0, 'auto']} 
-            tick={{fontSize: 10, fill: '#6b7280'}}
+
+          <YAxis
+            domain={[0, 'auto']}
+            tick={{ fontSize: 10, fill: '#6b7280' }}
             axisLine={false}
             tickLine={false}
-            label={{ value: '运势分', angle: -90, position: 'insideLeft', fontSize: 10, fill: '#9ca3af' }} 
+            label={{ value: '運勢分', angle: -90, position: 'insideLeft', fontSize: 10, fill: '#9ca3af' }}
           />
-          
+
           <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#9ca3af', strokeWidth: 1, strokeDasharray: '4 4' }} />
-          
+
           {/* Da Yun Reference Lines */}
           {daYunChanges.map((point, index) => (
-             <ReferenceLine 
-               key={`dayun-${index}`} 
-               x={point.age} 
-               stroke="#cbd5e1" 
-               strokeDasharray="3 3" 
-               strokeWidth={1}
-             >
-               <Label 
-                 value={point.daYun} 
-                 position="top" 
-                 fill="#6366f1" 
-                 fontSize={10} 
-                 fontWeight="bold"
-                 className="hidden md:block"
-               />
-             </ReferenceLine>
+            <ReferenceLine
+              key={`dayun-${index}`}
+              x={point.age}
+              stroke="#cbd5e1"
+              strokeDasharray="3 3"
+              strokeWidth={1}
+            >
+              <Label
+                value={point.daYun}
+                position="top"
+                fill="#6366f1"
+                fontSize={10}
+                fontWeight="bold"
+                className="hidden md:block"
+              />
+            </ReferenceLine>
           ))}
 
-          <Bar 
-            dataKey="bodyRange" 
-            shape={<CandleShape />} 
+          <Bar
+            dataKey="bodyRange"
+            shape={<CandleShape />}
             isAnimationActive={true}
             animationDuration={1500}
           >
@@ -230,13 +230,13 @@ const LifeKLineChart: React.FC<LifeKLineChartProps> = ({ data }) => {
               Only show label for the global Peak 
               We pass the computed maxHigh to the custom label component
             */}
-             <LabelList 
-              dataKey="high" 
-              position="top" 
+            <LabelList
+              dataKey="high"
+              position="top"
               content={<PeakLabel maxHigh={maxHigh} />}
             />
           </Bar>
-          
+
         </ComposedChart>
       </ResponsiveContainer>
     </div>
