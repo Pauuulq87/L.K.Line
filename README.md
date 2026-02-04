@@ -1,71 +1,62 @@
-# 🔮 人生 K 線 (Life Destiny K-Line)
+<div align="center">
 
-> **基於 AI 大模型和傳統八字命理，將人生運勢以 K 線圖形式視覺化呈現。**
+# 🔮 Life Destiny K-Line
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/5lin/lifekline)
+<img src="https://api.iconify.design/mdi/chart-line.svg" width="64" height="64" alt="K-Line"/>
 
----
+Visualize life fortune as K-line charts using AI and traditional Chinese astrology (BaZi).
 
-## ✨ 功能特點
+**English** | [繁體中文](./README_zh-TW.md) | [简体中文](./README_zh-CN.md)
 
-1. **視覺化運勢**: 用股票 K 線圖展示 1-100 歲的人生運勢起伏，直觀呈現人生「牛市」與「熊市」。
-2. **AI 深度批斷**: 生成性格、事業、財富、婚姻、健康、六親及發展風水等多維度報告。
-3. **發展風水**: 提供方位建議、地理環境選擇及開運佈局。
-4. **Web3 特供**: 「幣圈交易運勢」板塊，包含暴富流年預測與交易風格建議。
-5. **免 API**: 無需配置 API Key，複製提示詞到任意 AI 即可使用。
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Pauuulq87/L.K.Line)
+
+</div>
 
 ---
 
-## 📝 使用方法
+## Features
 
-1. **填寫八字資訊** - 輸入四柱干支和大運資訊
-2. **複製提示詞** - 點擊按鈕複製完整提示詞
-3. **發送給 AI** - 貼上到 ChatGPT、Claude、Gemini 等任意 AI
-4. **匯入結果** - 將 AI 回傳的 JSON 數據貼回
-5. **查看 K 線** - 生成完整的人生 K 線圖和分析報告
+1. **Visual Fortune** — Stock K-line charts showing life fortune from age 1-100, displaying life's "bull" and "bear" markets
+2. **AI Deep Analysis** — Reports on personality, career, wealth, marriage, health, and family
+3. **Feng Shui Guidance** — Direction recommendations, geographic environment choices, and lucky layout
+4. **Web3 Special** — Crypto trading fortune section with predictions and trading style suggestions
+5. **No API Required** — Copy prompts to any AI, no API key needed
 
----
+## Usage
 
-## 🚀 一鍵部署
+1. **Enter BaZi Info** — Input Four Pillars and Luck Cycle data
+2. **Copy Prompt** — Click button to copy complete prompt
+3. **Send to AI** — Paste into ChatGPT, Claude, Gemini, or any AI
+4. **Import Result** — Paste AI's JSON response back
+5. **View K-Line** — Generate complete life K-line chart and analysis
 
-### Vercel 部署（推薦）
+## Deploy
 
-點擊下方按鈕一鍵部署到 Vercel：
+### Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/lifekline)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Pauuulq87/L.K.Line)
 
-### 本地執行
+### Local
 
 ```bash
-# 安裝依賴
+# Install
 npm install
 
-# 啟動開發伺服器
+# Dev
 npm run dev
 
-# 建構生產版本
+# Build
 npm run build
 ```
 
 ---
 
-## 🛠️ 技術棧
+## License
 
-- **前端框架**: React 19 + Vite
-- **UI 樣式**: TailwindCSS
-- **圖表庫**: Recharts
-- **AI 支援**: ChatGPT、Claude、Gemini 等任意 AI
+MIT
 
----
+## Acknowledgements
 
-## 📸 專案預覽
+Made with ❤️ by **Pauuulq87**
 
-![人生流年大運K線圖](assets/1.png)
-*(圖1：人生流年大運 K 線走勢圖)*
-
-![詳細分析報告](assets/2.png)
-*(圖2：命理分析、幣圈運勢與風水建議)*
-
----
-
-**免責聲明**: 本專案僅供娛樂與文化研究，命運掌握在自己手中。切勿迷信，請理性看待分析結果。
+*Forked from [curionox/lifekline](https://github.com/curionox/lifekline)*
